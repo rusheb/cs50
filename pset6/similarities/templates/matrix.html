@@ -1,0 +1,50 @@
+<table class="table">
+    <thead></thead>
+    <tbody>
+        <!-- first row that shows the second word -->
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+
+            {% for letter in s2 %}
+            <th>{{ letter }}</th>
+            {% endfor %}
+
+        </tr>
+        <!-- second row contains index of s2 -->
+        <tr>
+            <th></th>
+            <th></th>
+
+            {% for n in range(s2|length + 1) %}
+            <th>{{ n }}</th>
+            {% endfor %}
+
+        </tr>
+
+        {% set count = namespace(a=-1) %}
+
+         <!-- populate the rest of the rows using the matrix --->
+        {% for row in matrix %}
+        <tr>
+            <!-- first column contains the letters of s1 -->
+            {% if count.a < 0 %}
+            <th></th>
+            {% else %}
+            <th>{{ s1[count.a] }}</th>
+            {% endif %}
+
+            <!-- second column contains the index of s1 -->
+            <th>{{ count.a + 1 }}</th>
+
+            {% for i in row %}
+            <td>{{ i[0] }}</td>
+            {% endfor %}
+
+        </tr>
+        {% set count.a = count.a + 1 %}
+        {% endfor %}
+
+    </tbody>
+</table>
